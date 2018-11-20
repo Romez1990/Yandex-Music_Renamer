@@ -70,21 +70,26 @@ void Band(std::string PathToRead)
 		std::string FolderName = Folder.path().string().substr(StartName(Folder.path().string()));
 		std::string NewFolderName;
 
-		std::string Year = FolderName.substr(0, 4);
+		std::string AlbumName = FolderName.substr(FolderName.find('-', FolderName.find('-') + 1) + 2);
+		NewFolderName += AlbumName;
 
+		std::string Year = FolderName.substr(0, 4);
 		NewFolderName += " (" + Year + ")";
 
-		std::cout << NewFolderName << std::endl;
+		rename((PathToRead + '\\' + FolderName).c_str(), (PathToRead + '\\' + NewFolderName).c_str());
 
-		//Album(PathToRead + '\\' + NewFolderName);
+		Album(PathToRead + '\\' + NewFolderName);
 	}
 }
 
 int main(int argc, char* argv[])
 {
-	Band(R"(C:\Users\User\source\repos\I See Stars)");
-
 	/*
+	for (int i = 0; i < argc; i++)
+		std::cout << argv[i] << std::endl;
+	//*/
+
+	//*
 	if (argc == 1)
 	{
 		std::cout << "I'll help you..." << std::endl;
@@ -93,13 +98,40 @@ int main(int argc, char* argv[])
 	{
 		if (argv[1] == std::string("--album") || argv[1] == std::string("-a"))
 		{
-			Album(R"(C:\Users\User\source\repos\I See Stars\2013 - I See Stars - New Demons)");
-			//Album(std::experimental::filesystem::current_path().string());
+			Album(std::experimental::filesystem::current_path().string());
 		}
 		else if (argv[1] == std::string("--band") || argv[1] == std::string("-b"))
 		{
-			Band(R"(C:\Users\User\source\repos\I See Stars)");
-			//Band(std::experimental::filesystem::current_path().string());
+			Band(std::experimental::filesystem::current_path().string());
+		}
+	}
+	else if (argc == 3)
+	{
+		if (argv[2] == std::string("--album") || argv[2] == std::string("-a"))
+		{
+			if (argv[1][1] == ':' || argv[1][0] == '/')
+			{
+				// Absolute path
+				Album(argv[1]);
+			}
+			else
+			{
+				// Relative path
+				Album(std::experimental::filesystem::current_path().string() + '\\' + argv[1]);
+			}
+		}
+		else if (argv[2] == std::string("--band") || argv[2] == std::string("-b"))
+		{
+			if (argv[1][1] == ':' || argv[1][0] == '/')
+			{
+				// Absolute path
+				Band(argv[1]);
+			}
+			else
+			{
+				// Relative path
+				Band(std::experimental::filesystem::current_path().string() + '\\' + argv[1]);
+			}
 		}
 	}
 	//*/
