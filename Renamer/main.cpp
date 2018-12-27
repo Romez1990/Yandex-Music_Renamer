@@ -18,7 +18,7 @@ std::string GetFileExtension(std::string File)
 
 std::list<std::string> ReadFolder(std::string PathToRead)
 {
-	auto Files = std::experimental::filesystem::directory_iterator(PathToRead);
+	auto Files = std::filesystem::directory_iterator(PathToRead);
 	std::list<std::string> mp3Files = {};
 	for (const auto &File : Files)
 	{
