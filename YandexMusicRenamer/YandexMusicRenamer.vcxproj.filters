@@ -18,9 +18,27 @@
     <ClInclude Include="main.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="compilation.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="album.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="band.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="album.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="band.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="compilation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
