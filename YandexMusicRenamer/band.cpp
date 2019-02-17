@@ -43,14 +43,12 @@ void band(const fs::path& path)
 		}
 	}
 
-	const bool need_add_0 = band_dirs.size() >= 10;
+	const bool list_greater_than_10 = band_dirs.size() >= 10;
 	for (int i = 0; i < band_dirs.size(); ++i)
 	{
-		string album_number;
-		if (need_add_0)
-			album_number = i < 10 ? "0" + to_string(i + 1) : to_string(i + 1);
-		else
-			album_number = to_string(i + 1);
+		string album_number = to_string(i + 1);
+		if (list_greater_than_10 && i + 1 < 10)
+			album_number.insert(0, "0");
 
 		const string new_name = album_number + band_dirs[i].new_name;
 		const fs::path new_path = path / new_name.c_str();
