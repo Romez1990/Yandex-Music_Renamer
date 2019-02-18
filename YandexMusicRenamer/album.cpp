@@ -17,7 +17,7 @@ void album(const string& path)
 
 void album(const fs::path& path)
 {
-	const regex check(R"((\d{1,2})\.( .+\.mp3))");
+	const regex check(R"((\d{1,2})\. (.+\.mp3))");
 	const string replace("$1 $2");
 
 	for (const auto& entry : fs::directory_iterator(path))
