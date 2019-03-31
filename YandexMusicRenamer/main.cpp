@@ -27,12 +27,16 @@ int main(const int argc, const char* argv[])
 	}
 	else if (argc == 3)
 	{
-		if (string(argv[2]) == "--album" || string(argv[2]) == "-a")
-			absolute_or_relative(string(argv[1]), album, album);
-		else if (string(argv[2]) == "--band" || string(argv[2]) == "-b")
-			absolute_or_relative(string(argv[1]), band, band);
-		else if (string(argv[2]) == "--compilation" || string(argv[2]) == "-c")
-			absolute_or_relative(string(argv[1]), compilation, compilation);
+		if (string(argv[1]) == "--album" || string(argv[1]) == "-a")
+			absolute_or_relative(string(argv[2]), album, album);
+		else if (string(argv[1]) == "--band" || string(argv[1]) == "-b")
+			absolute_or_relative(string(argv[2]), band, band);
+		else if (string(argv[1]) == "--compilation" || string(argv[1]) == "-c")
+			absolute_or_relative(string(argv[2]), compilation, compilation);
+	}
+	else
+	{
+		cout << "Wrong parameters" << endl;
 	}
 
 	return 0;
