@@ -10,7 +10,7 @@ int main(const int argc, const char* argv[])
 	{
 		const fs::path path = fs::current_path();
 		if (string(argv[1]) == "--album" || string(argv[1]) == "-a")
-			album(path);
+			album(path, true);
 		else if (string(argv[1]) == "--band" || string(argv[1]) == "-b")
 			band(path);
 		else if (string(argv[1]) == "--compilation" || string(argv[1]) == "-c")
@@ -29,7 +29,7 @@ int main(const int argc, const char* argv[])
 		}
 
 		if (string(argv[1]) == "--album" || string(argv[1]) == "-a")
-			album(path);
+			album(path, true);
 		else if (string(argv[1]) == "--band" || string(argv[1]) == "-b")
 			band(path);
 		else if (string(argv[1]) == "--compilation" || string(argv[1]) == "-c")
