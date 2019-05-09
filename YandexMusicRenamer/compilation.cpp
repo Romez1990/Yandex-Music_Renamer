@@ -1,20 +1,5 @@
 #include "compilation.hpp"
 
-void compilation()
-{
-	compilation(fs::current_path());
-}
-
-void compilation(const char* path)
-{
-	compilation(fs::path(path));
-}
-
-void compilation(const string& path)
-{
-	compilation(fs::path(path));
-}
-
 void compilation(const fs::path& path)
 {
 	for (const auto& entry : fs::directory_iterator(path))

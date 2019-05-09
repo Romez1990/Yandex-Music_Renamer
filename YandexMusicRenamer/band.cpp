@@ -1,19 +1,5 @@
 #include "band.hpp"
 
-void band()
-{
-	band(fs::current_path());
-}
-
-void band(const char* path)
-{
-	band(fs::path(path));
-}
-
-void band(const string& path)
-{
-	band(fs::path(path));
-}
 
 struct band_dir
 {

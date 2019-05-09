@@ -1,20 +1,5 @@
 #include "album.hpp"
 
-void album()
-{
-	album(fs::current_path());
-}
-
-void album(const char* path)
-{
-	album(fs::path(path));
-}
-
-void album(const string& path)
-{
-	album(fs::path(path));
-}
-
 void album(const fs::path& path)
 {
 	const regex check(R"((\d{1,2})\. (.+\.mp3))");

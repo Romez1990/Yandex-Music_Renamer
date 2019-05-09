@@ -1,15 +1,5 @@
 #include "compilation.hpp"
 
-void absolute_or_relative(const string path, void (*absolute)(const string& path1), void (*relative)(const fs::path& path2))
-{
-	if (path[1] == ':' || path[0] == '/')
-		// Absolute path
-		absolute(path);
-	else
-		// Relative path
-		relative(fs::current_path() / path);
-}
-
 int main(const int argc, const char* argv[])
 {
 	if (argc == 1)
@@ -18,21 +8,32 @@ int main(const int argc, const char* argv[])
 	}
 	else if (argc == 2)
 	{
+		const fs::path path = fs::current_path();
 		if (string(argv[1]) == "--album" || string(argv[1]) == "-a")
-			album();
+			album(path);
 		else if (string(argv[1]) == "--band" || string(argv[1]) == "-b")
-			band(fs::current_path().string());
+			band(path);
 		else if (string(argv[1]) == "--compilation" || string(argv[1]) == "-c")
-			compilation(fs::current_path());
+			compilation(path);
+		else
+			cout << "Wrong parameter" << endl;
 	}
 	else if (argc == 3)
 	{
+		const fs::path path = fs::current_path() / fs::path(argv[2]);
+
+		if (!exists(path))
+		{
+			cout << "Folder does not exist" << endl;
+			return 1;
+		}
+
 		if (string(argv[1]) == "--album" || string(argv[1]) == "-a")
-			absolute_or_relative(string(argv[2]), album, album);
+			album(path);
 		else if (string(argv[1]) == "--band" || string(argv[1]) == "-b")
-			absolute_or_relative(string(argv[2]), band, band);
+			band(path);
 		else if (string(argv[1]) == "--compilation" || string(argv[1]) == "-c")
-			absolute_or_relative(string(argv[2]), compilation, compilation);
+			compilation(path);
 	}
 	else
 	{
