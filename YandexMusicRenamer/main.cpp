@@ -14,7 +14,7 @@ int main(const int argc, const char* argv[])
 {
 	if (argc == 1)
 	{
-		cout << "I'll help you..." << endl;
+		cout << "I'll help you... Soon..." << endl;
 	}
 	else if (argc == 2)
 	{
