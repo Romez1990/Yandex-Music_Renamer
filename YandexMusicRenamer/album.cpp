@@ -4,11 +4,11 @@ void album(const fs::path& path, const bool main)
 {
 	if (main)
 	{
-		const regex check(R"(((?:20|19)\d{2}) - (.+) - (.+))");
+		const regex check(R"(((?:20|19)\d{2}) - .+ - (.+))");
 		const string dirname(path.filename().string());
 		if (regex_match(dirname, check))
 		{
-			const string replace("$3 ($1)");
+			const string replace("$2 ($1)");
 			rename(path, path / ".." / regex_replace(dirname, check, replace));
 		}
 	}
