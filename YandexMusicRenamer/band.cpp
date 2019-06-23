@@ -1,13 +1,9 @@
 #include "band.hpp"
 
-void band(const fs::path& path)
+vector<string> find_albums(const fs::path& dir, const regex& check)
 {
-	const regex check(R"(((?:20|19)\d{2}) - (.+) - (.+))");
-	const string replace(" $3 ($1)");
-
-	vector<string> old_dirnames;
-
-	for (const auto& entry : fs::directory_iterator(path))
+	vector<string> dirnames;
+	for (const auto& entry : fs::directory_iterator(dir))
 	{
 		const fs::path& entry_path = entry.path();
 		if (!is_directory(entry_path)) continue;
@@ -15,17 +11,30 @@ void band(const fs::path& path)
 		const string dirname = entry_path.filename().string();
 		album(entry_path, false);
 		if (regex_match(dirname, check))
-			old_dirnames.push_back(dirname);
+			dirnames.push_back(dirname);
 	}
+	return dirnames;
+}
 
-	const bool list_greater_than_10 = old_dirnames.size() >= 10;
-	for (int i = 0; i < old_dirnames.size(); ++i)
+void rename_albums(const fs::path& dir, const vector<string>& albums, const regex& check, const string& replace)
+{
+	const bool list_greater_than_10 = albums.size() >= 10;
+	for (size_t i = 0; i < albums.size(); ++i)
 	{
 		string album_number = to_string(i + 1);
 		if (list_greater_than_10 && i + 1 < 10)
 			album_number.insert(0, "0");
 
-		const string new_name = album_number + regex_replace(old_dirnames[i], check, replace);
-		rename(path / old_dirnames[i], path / new_name);
+		const string new_name = album_number + regex_replace(albums[i], check, replace);
+		rename(dir / albums[i], dir / new_name);
 	}
+}
+
+void band(const fs::path& dir)
+{
+	const regex check(R"(((?:20|19)\d{2}) - (.+) - (.+))");
+	const string replace(" $3 ($1)");
+
+	const vector<string> albums = find_albums(dir, check);
+	rename_albums(dir, albums, check, replace);
 }

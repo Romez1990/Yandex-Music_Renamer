@@ -2,4 +2,4 @@
 #include "main.hpp"
 #include "band.hpp"
 
-void compilation(const fs::path& path);
+void compilation(const fs::path& dir);

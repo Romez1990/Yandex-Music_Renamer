@@ -1,32 +1,39 @@
 #include "album.hpp"
 
-void album(const fs::path& path, const bool main)
+void rename_album(const fs::path& path)
+{
+	const regex check(R"(((?:20|19)\d{2}) - .+ - (.+))");
+	const string dirname(path.filename().string());
+	if (regex_match(dirname, check))
+	{
+		const string replace("$2 ($1)");
+		rename(path, path / ".." / regex_replace(dirname, check, replace));
+	}
+}
+
+void rename_track(const fs::path& dir, const fs::path& track, const regex& check, const string& replace)
+{
+	const string filename = track.filename().string();
+	if (regex_match(filename, check))
+	{
+		const string new_name = regex_replace(filename, check, replace);
+		rename(dir / filename, dir / new_name);
+	}
+}
+
+void album(const fs::path& dir, const bool main)
 {
 	if (main)
-	{
-		const regex check(R"(((?:20|19)\d{2}) - .+ - (.+))");
-		const string dirname(path.filename().string());
-		if (regex_match(dirname, check))
-		{
-			const string replace("$2 ($1)");
-			rename(path, path / ".." / regex_replace(dirname, check, replace));
-		}
-	}
+		rename_album(dir);
 
 	const regex check(R"((\d{1,2})\. (.+\.mp3))");
 	const string replace("$1 $2");
 
-	for (const auto& entry : fs::directory_iterator(path))
+	for (const auto& entry : fs::directory_iterator(dir))
 	{
-		const fs::path& entry_path = entry.path();
+		const fs::path& track = entry.path();
+		if (is_directory(track)) continue;
 
-		if (is_directory(entry_path)) continue;
-
-		const string filename = entry_path.filename().string();
-		if (regex_match(filename, check))
-		{
-			const string new_name = regex_replace(filename, check, replace);
-			rename(path / filename, path / new_name);
-		}
+		rename_track(dir, track, check, replace);
 	}
 }

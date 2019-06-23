@@ -1,12 +1,12 @@
 #include "compilation.hpp"
 
-void compilation(const fs::path& path)
+void compilation(const fs::path& dir)
 {
-	for (const auto& entry : fs::directory_iterator(path))
+	for (const auto& entry : fs::directory_iterator(dir))
 	{
-		const fs::path& entry_path = entry.path();
-		if (!is_directory(entry_path)) continue;
+		const fs::path& band_ = entry.path();
+		if (!is_directory(band_)) continue;
 
-		band(entry_path);
+		band(band_);
 	}
 }
