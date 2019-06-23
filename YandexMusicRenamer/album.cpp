@@ -23,9 +23,6 @@ void rename_track(const fs::path& dir, const fs::path& track, const regex& check
 
 void album(const fs::path& dir, const bool main)
 {
-	if (main)
-		rename_album(dir);
-
 	const regex check(R"((\d{1,2})\. (.+\.mp3))");
 	const string replace("$1 $2");
 
@@ -36,4 +33,7 @@ void album(const fs::path& dir, const bool main)
 
 		rename_track(dir, track, check, replace);
 	}
+
+	if (main)
+		rename_album(dir);
 }
