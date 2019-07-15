@@ -2,4 +2,7 @@
 #include "main.hpp"
 #include "band.hpp"
 
-void compilation(const fs::path& dir);
+namespace ren
+{
+	void compilation(const fs::path& dir);
+}

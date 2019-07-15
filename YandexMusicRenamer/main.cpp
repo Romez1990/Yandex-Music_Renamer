@@ -10,11 +10,11 @@ int main(const int argc, const char* argv[])
 	{
 		const fs::path dir = fs::current_path();
 		if (string(argv[1]) == "--album" || string(argv[1]) == "-a")
-			album(dir, true);
+			ren::album(dir, true);
 		else if (string(argv[1]) == "--band" || string(argv[1]) == "-b")
-			band(dir);
+			ren::band(dir);
 		else if (string(argv[1]) == "--compilation" || string(argv[1]) == "-c")
-			compilation(dir);
+			ren::compilation(dir);
 		else
 			cout << "Wrong parameter" << endl;
 	}
@@ -28,11 +28,11 @@ int main(const int argc, const char* argv[])
 		}
 
 		if (string(argv[1]) == "--album" || string(argv[1]) == "-a")
-			album(dir, true);
+			ren::album(dir, true);
 		else if (string(argv[1]) == "--band" || string(argv[1]) == "-b")
-			band(dir);
+			ren::band(dir);
 		else if (string(argv[1]) == "--compilation" || string(argv[1]) == "-c")
-			compilation(dir);
+			ren::compilation(dir);
 	}
 	else
 	{

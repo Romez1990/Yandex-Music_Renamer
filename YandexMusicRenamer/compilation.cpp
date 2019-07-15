@@ -1,6 +1,6 @@
 #include "compilation.hpp"
 
-void compilation(const fs::path& dir)
+void ren::compilation(const fs::path& dir)
 {
 	for (const auto& entry : fs::directory_iterator(dir))
 	{

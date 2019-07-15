@@ -1,6 +1,6 @@
 #include "album.hpp"
 
-void rename_album(const fs::path& path)
+void ren::rename_album(const fs::path& path)
 {
 	const regex check(R"(((?:20|19)\d{2}) - .+ - (.+))");
 	const string dirname(path.filename().string());
@@ -11,7 +11,7 @@ void rename_album(const fs::path& path)
 	}
 }
 
-void rename_track(const fs::path& dir, const fs::path& track, const regex& check, const string& replace)
+void ren::rename_track(const fs::path& dir, const fs::path& track, const regex& check, const string& replace)
 {
 	const string filename = track.filename().string();
 	if (regex_match(filename, check))
@@ -21,7 +21,7 @@ void rename_track(const fs::path& dir, const fs::path& track, const regex& check
 	}
 }
 
-void album(const fs::path& dir, const bool main)
+void ren::album(const fs::path& dir, const bool main)
 {
 	const regex check(R"((\d{1,2})\. (.+\.mp3))");
 	const string replace("$1 $2");
