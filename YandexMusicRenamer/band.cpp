@@ -18,13 +18,10 @@ vector<string> find_albums(const fs::path& dir, const regex& check)
 
 void rename_albums(const fs::path& dir, const vector<string>& albums, const regex& check, const string& replace)
 {
-	const bool list_greater_than_10 = albums.size() >= 10;
 	for (size_t i = 0; i < albums.size(); ++i)
 	{
-		string album_number = to_string(i + 1);
-		if (list_greater_than_10 && i + 1 < 10)
-			album_number.insert(0, "0");
-
+		char album_number[3];
+		sprintf_s(album_number, "%02u", i + 1);
 		const string new_name = album_number + regex_replace(albums[i], check, replace);
 		rename(dir / albums[i], dir / new_name);
 	}
