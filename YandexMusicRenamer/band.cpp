@@ -1,6 +1,6 @@
 #include "band.hpp"
 
-vector<string> ren::find_albums(const fs::path& dir, const regex& check)
+auto ren::find_albums(const fs::path& dir, const regex& check) -> vector<string>
 {
 	vector<string> dirnames;
 	for (const auto& entry : fs::directory_iterator(dir))
@@ -16,7 +16,7 @@ vector<string> ren::find_albums(const fs::path& dir, const regex& check)
 	return dirnames;
 }
 
-void ren::rename_albums(const fs::path& dir, const vector<string>& albums, const regex& check, const string& replace)
+auto ren::rename_albums(const fs::path& dir, const vector<string>& albums, const regex& check, const string& replace) -> void
 {
 	for (size_t i = 0; i < albums.size(); ++i)
 	{
@@ -27,7 +27,7 @@ void ren::rename_albums(const fs::path& dir, const vector<string>& albums, const
 	}
 }
 
-void ren::band(const fs::path& dir)
+auto ren::band(const fs::path& dir) -> void
 {
 	const regex check(R"(((?:20|19)\d{2}) - (.+) - (.+))");
 	const string replace(" $3 ($1)");

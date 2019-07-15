@@ -4,5 +4,5 @@
 
 namespace ren
 {
-	void compilation(const fs::path& dir);
+	auto compilation(const fs::path& dir) -> void;
 }
