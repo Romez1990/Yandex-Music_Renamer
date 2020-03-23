@@ -6,13 +6,13 @@ namespace ren
 {
 	auto find_albums(
 		const fs::path& dir,
-		const regex& check
-	) -> vector<string>;
+		const std::regex& check
+	) -> std::vector<std::string>;
 	auto rename_albums(
 		const fs::path& dir,
-		const vector<string>& albums,
-		const regex& check,
-		const string& replace
+		const std::vector<std::string>& albums,
+		const std::regex& check,
+		const std::string& replace
 	) -> void;
 	auto band(const fs::path& dir) -> void;
 }
