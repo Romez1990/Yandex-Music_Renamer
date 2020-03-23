@@ -7,8 +7,8 @@ namespace ren
 	auto rename_track(
 		const fs::path& dir,
 		const fs::path& track,
-		const std::regex& check,
-		const std::string& replace
+		const std::wregex& check,
+		const std::wstring& replace
 	) -> void;
 	auto album(const fs::path& dir, const bool main) -> void;
 }

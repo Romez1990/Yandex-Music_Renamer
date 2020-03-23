@@ -2,12 +2,12 @@
 
 auto ren::rename_album(const fs::path& dir_path) -> void
 {
-	const std::regex check(R"(((?:20|19)\d{2}) - .+ - (.+))");
-	const std::string dirname = dir_path.filename().string();
+	const std::wregex check(LR"(((?:20|19)\d{2}) - .+ - (.+))");
+	const std::wstring dirname = dir_path.filename().wstring();
 	if (regex_match(dirname, check))
 	{
-		const std::string replace = "$2 ($1)";
-		const std::string new_dirname = regex_replace(dirname, check, replace);
+		const std::wstring replace = L"$2 ($1)";
+		const std::wstring new_dirname = regex_replace(dirname, check, replace);
 		const fs::path new_dir_path = dir_path / ".." / new_dirname;
 		rename(dir_path, new_dir_path);
 	}
@@ -16,22 +16,22 @@ auto ren::rename_album(const fs::path& dir_path) -> void
 auto ren::rename_track(
 	const fs::path& dir,
 	const fs::path& track,
-	const std::regex& check,
-	const std::string& replace
+	const std::wregex& check,
+	const std::wstring& replace
 ) -> void
 {
-	const std::string filename = track.filename().string();
+	const std::wstring filename = track.filename().wstring();
 	if (regex_match(filename, check))
 	{
-		const std::string new_name = regex_replace(filename, check, replace);
+		const std::wstring new_name = regex_replace(filename, check, replace);
 		rename(dir / filename, dir / new_name);
 	}
 }
 
 auto ren::album(const fs::path& dir, const bool main) -> void
 {
-	const std::regex check(R"((\d{1,2})\. (.+\.mp3))");
-	const std::string replace = "$1 $2";
+	const std::wregex check(LR"((\d{1,2})\. (.+\.mp3))");
+	const std::wstring replace = L"$1 $2";
 
 	for (const auto& entry : fs::directory_iterator(dir))
 	{
