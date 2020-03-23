@@ -28,9 +28,11 @@ auto ren::rename_albums(
 {
 	for (size_t i = 0; i < albums.size(); ++i)
 	{
-		char album_number[3];
-		sprintf_s(album_number, "%02u", i + 1);
-		const std::string new_name = album_number + regex_replace(albums[i], check, replace);
+		const int number_length = std::to_string(albums.size()).length();
+		std::ostringstream album_number_stream;
+		album_number_stream << std::setw(number_length) << std::setfill(L'0') << i + 1;
+		const std::string album_number = album_number_stream.str();
+		const std::string new_name = album_number + std::regex_replace(albums[i], check, replace);
 		rename(dir / albums[i], dir / new_name);
 	}
 }
