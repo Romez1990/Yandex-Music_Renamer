@@ -11,8 +11,7 @@ namespace ren
 	auto rename_albums(
 		const fs::path& dir,
 		const std::vector<std::wstring>& albums,
-		const std::wregex& check,
-		const std::wstring& replace
+		const std::wregex& check
 	) -> void;
 	auto band(const fs::path& dir) -> void;
 }

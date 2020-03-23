@@ -22,8 +22,7 @@ auto ren::find_albums(
 auto ren::rename_albums(
 	const fs::path& dir,
 	const std::vector<std::wstring>& albums,
-	const std::wregex& check,
-	const std::wstring& replace
+	const std::wregex& check
 ) -> void
 {
 	for (size_t i = 0; i < albums.size(); ++i)
@@ -32,7 +31,8 @@ auto ren::rename_albums(
 		std::wostringstream album_number_stream;
 		album_number_stream << std::setw(number_length) << std::setfill(L'0') << i + 1;
 		const std::wstring album_number = album_number_stream.str();
-		const std::wstring new_name = album_number + regex_replace(albums[i], check, replace);
+		const std::wstring replace = album_number + L" $3 ($1)";
+		const std::wstring new_name = regex_replace(albums[i], check, replace);
 		rename(dir / albums[i], dir / new_name);
 	}
 }
@@ -40,8 +40,7 @@ auto ren::rename_albums(
 auto ren::band(const fs::path& dir) -> void
 {
 	const std::wregex check(LR"(((?:20|19)\d{2}) - (.+) - (.+))");
-	const std::wstring replace = L" $3 ($1)";
 
 	const std::vector<std::wstring> albums = find_albums(dir, check);
-	rename_albums(dir, albums, check, replace);
+	rename_albums(dir, albums, check);
 }
