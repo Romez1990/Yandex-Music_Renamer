@@ -11,7 +11,12 @@ auto ren::rename_album(const fs::path& path) -> void
 	}
 }
 
-auto ren::rename_track(const fs::path& dir, const fs::path& track, const regex& check, const string& replace) -> void
+auto ren::rename_track(
+	const fs::path& dir,
+	const fs::path& track,
+	const regex& check,
+	const string& replace
+) -> void
 {
 	const string filename = track.filename().string();
 	if (regex_match(filename, check))

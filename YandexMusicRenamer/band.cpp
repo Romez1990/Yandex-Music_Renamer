@@ -1,6 +1,9 @@
 #include "band.hpp"
 
-auto ren::find_albums(const fs::path& dir, const regex& check) -> vector<string>
+auto ren::find_albums(
+	const fs::path& dir,
+	const regex& check
+) -> vector<string>
 {
 	vector<string> dirnames;
 	for (const auto& entry : fs::directory_iterator(dir))
@@ -16,7 +19,12 @@ auto ren::find_albums(const fs::path& dir, const regex& check) -> vector<string>
 	return dirnames;
 }
 
-auto ren::rename_albums(const fs::path& dir, const vector<string>& albums, const regex& check, const string& replace) -> void
+auto ren::rename_albums(
+	const fs::path& dir,
+	const vector<string>& albums,
+	const regex& check,
+	const string& replace
+) -> void
 {
 	for (size_t i = 0; i < albums.size(); ++i)
 	{
