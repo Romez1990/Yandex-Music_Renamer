@@ -38,7 +38,7 @@ auto ren::rename_albums(
 auto ren::band(const fs::path& dir) -> void
 {
 	const std::regex check(R"(((?:20|19)\d{2}) - (.+) - (.+))");
-	const std::string replace(" $3 ($1)");
+	const std::string replace = " $3 ($1)";
 
 	const std::vector<std::string> albums = find_albums(dir, check);
 	rename_albums(dir, albums, check, replace);

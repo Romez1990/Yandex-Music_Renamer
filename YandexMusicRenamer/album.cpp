@@ -1,13 +1,15 @@
 #include "album.hpp"
 
-auto ren::rename_album(const fs::path& path) -> void
+auto ren::rename_album(const fs::path& dir_path) -> void
 {
 	const std::regex check(R"(((?:20|19)\d{2}) - .+ - (.+))");
-	const std::string dirname(path.filename().string());
+	const std::string dirname = dir_path.filename().string();
 	if (regex_match(dirname, check))
 	{
-		const std::string replace("$2 ($1)");
-		rename(path, path / ".." / regex_replace(dirname, check, replace));
+		const std::string replace = "$2 ($1)";
+		const std::string new_dirname = regex_replace(dirname, check, replace);
+		const fs::path new_dir_path = dir_path / ".." / new_dirname;
+		rename(dir_path, new_dir_path);
 	}
 }
 
@@ -29,7 +31,7 @@ auto ren::rename_track(
 auto ren::album(const fs::path& dir, const bool main) -> void
 {
 	const std::regex check(R"((\d{1,2})\. (.+\.mp3))");
-	const std::string replace("$1 $2");
+	const std::string replace = "$1 $2";
 
 	for (const auto& entry : fs::directory_iterator(dir))
 	{
@@ -39,6 +41,5 @@ auto ren::album(const fs::path& dir, const bool main) -> void
 		rename_track(dir, track, check, replace);
 	}
 
-	if (main)
-		rename_album(dir);
+	if (main) rename_album(dir);
 }

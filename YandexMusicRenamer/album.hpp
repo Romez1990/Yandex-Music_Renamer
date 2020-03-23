@@ -3,7 +3,7 @@
 
 namespace ren
 {
-	auto rename_album(const fs::path& path) -> void;
+	auto rename_album(const fs::path& dir_path) -> void;
 	auto rename_track(
 		const fs::path& dir,
 		const fs::path& track,
